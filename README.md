@@ -60,7 +60,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-# Configuración de la base de datos
+Configuración de la base de datos
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://usuario:contraseña@localhost/historial_db'
 db = SQLAlchemy(app)
 
@@ -90,4 +90,5 @@ def guardar_historial():
 
 if __name__ == '__main__':
     db.create_all()  
+
     app.run(debug=True)
