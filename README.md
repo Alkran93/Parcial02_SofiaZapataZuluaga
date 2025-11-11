@@ -1,3 +1,4 @@
+# Explicaciíon
 El diseño del microservicio se modificaría para incluir una capa adicional de comunicación entre microservicios: 
 
 * Comunicación entre microservicios:
@@ -10,7 +11,7 @@ El microservicio de historial debería estar configurado para recibir datos de o
 El microservicio de historial almacenará los datos de cada cálculo (número, factorial y la etiqueta "par/impar") en una base de datos externa. Esto podría ser una base de datos SQL (como MySQL o PostgreSQL) o NoSQL (como MongoDB), dependiendo de los requisitos del sistema.
 
 -----------------------------------------------------------------------
-Flujo Modificado del Microservicio
+## Flujo Modificado del Microservicio
 
 1. Solicitud Inicial: El microservicio de cálculo recibe un número en la URL
 2. Cálculo del Factorial: Calcula el factorial y determina si el factorial es par o impar
@@ -19,7 +20,7 @@ Flujo Modificado del Microservicio
 5. Respuesta: El microservicio de cálculo puede responder con una confirmación o un mensaje de éxito.
 
 -----------------------------------------------------------------------
-Modificar el Microservicio de Cálculo:
+## Modificar el Microservicio de Cálculo:
 
 import requests
 import math
@@ -51,7 +52,7 @@ def guardar_calculo_en_historial(numero, resultado_factorial, es_par):
         print("Error al guardar el cálculo en el historial")
 
 
-Crear el Microservicio de Historial:
+### Crear el Microservicio de Historial:
 
 Este microservicio debe tener un endpoint que reciba las solicitudes POST y almacene los datos en la base de datos. Aquí es donde se guardarán los cálculos (número, factorial y si es par o impar).
 
@@ -92,3 +93,4 @@ if __name__ == '__main__':
     db.create_all()  
 
     app.run(debug=True)
+
