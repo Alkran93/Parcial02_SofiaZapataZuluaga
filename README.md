@@ -52,16 +52,18 @@ def guardar_calculo_en_historial(numero, resultado_factorial, es_par):
         print("Error al guardar el cálculo en el historial")
 
 
-### Crear el Microservicio de Historial:
+## Crear el Microservicio de Historial
 
-Este microservicio debe tener un endpoint que reciba las solicitudes POST y almacene los datos en la base de datos. Aquí es donde se guardarán los cálculos (número, factorial y si es par o impar).
+Este microservicio debe tener un endpoint que reciba las solicitudes **POST** y almacene los datos en la base de datos. Aquí es donde se guardarán los cálculos (número, factorial y si es par o impar).
 
+### **Código del Microservicio de Historial:**
+
+```python
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-Configuración de la base de datos
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://usuario:contraseña@localhost/historial_db'
 db = SQLAlchemy(app)
 
@@ -73,6 +75,7 @@ class Historial(db.Model):
 
 @app.route('/api/historial', methods=['POST'])
 def guardar_historial():
+    # Obtener los datos enviados en la solicitud
     data = request.get_json()
 
     numero = data['numero']
@@ -81,7 +84,7 @@ def guardar_historial():
 
     nuevo_calculo = Historial(numero=numero, factorial=factorial, par_impar=par_impar)
 
-    try:
+   try:
         db.session.add(nuevo_calculo)
         db.session.commit()
         return jsonify({"message": "Cálculo guardado con éxito"}), 200
@@ -90,7 +93,6 @@ def guardar_historial():
         return jsonify({"message": "Error al guardar el cálculo", "error": str(e)}), 500
 
 if __name__ == '__main__':
-    db.create_all()  
+    db.create_all()  # Crear las tablas
 
     app.run(debug=True)
-
